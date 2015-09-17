@@ -1,0 +1,3 @@
+INFO:werkzeug: * Running on http://127.0.0.1:8001/ (Press CTRL+C to quit)
+DEBUG:dt_regression_api.auth.views:Test
+INFO:werkzeug:127.0.0.1 - - [17/Sep/2015 17:14:51] "GET / HTTP/1.1" 200 -
