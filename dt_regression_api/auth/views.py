@@ -7,3 +7,4 @@ def check_auth(username, password):
     """
     This method is used to check the username, password against the database to authenticate a sure
     """
+

@@ -2,8 +2,9 @@ __author__ = 'alandinneen'
 
 
 class Configuration(object):
-    EFNCONN = 'mysql+mysqldb://eshots_readonly:fr0sti3s@192.168.27.183:3306/efn'
-
+    MONGO_IP = 'localhost'
+    MONGO_PORT = 27017
+    MONGO_DB = 'uploads'
 
 class DevConfiguration(Configuration):
     DEBUG = True
