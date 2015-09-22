@@ -4,6 +4,7 @@ import settings as app_settings
 from sys import argv
 from inspect import getmembers, isclass
 
+
 # Get class names in global user defined app settings
 settingsclsnames = getmembers(app_settings, isclass)
 
@@ -23,6 +24,7 @@ for arg in argv:
         obj = app_settings.DevConfiguration
 
 app = create_app(obj)
+
 
 #create and run app with user defined parameters or the default dev configuration
 app.run(host=obj.host, port=int(obj.port))

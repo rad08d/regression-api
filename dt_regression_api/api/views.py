@@ -1,12 +1,14 @@
 __author__ = 'alandinneen'
+from logging import getLogger
+from time import time
+from datetime import datetime
+
 from . import api_blueprint
 from settings import Configuration
 from pymongo import MongoClient, errors
-from logging import getLogger
 from flask import Response, request
-from json import dumps
-from time import time
-from datetime import datetime
+from dt_regression_api.tasks import send_upload_notification
+
 
 @api_blueprint.route('/api/upload', methods=['POST'])
 def upload():
@@ -15,7 +17,7 @@ def upload():
     with the remote ip address.
     """
     logger = getLogger(__name__)
-    data = str(request.get_data())
+    data = str(request.get_data(as_text=True))
     requestip = request.remote_addr
     ts = time()
     timestamp = datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
@@ -29,30 +31,23 @@ def upload():
         db = client[settings.MONGO_DB]
         upload = db.uploads
         upload_id = upload.insert_one(datadict).inserted_id
-        responsejs = build_response_js("Success", requestip)
+        responsejs = settings.build_response_js("Success", requestip)
         resp = Response(responsejs, status=200, mimetype='application/json')
     except errors.NetworkTimeout as e:
         logger.info("Insert failed. There has been a network error. ", e)
-        responsejs = build_response_js("Failure", requestip)
+        responsejs = settings.build_response_js("Failure", requestip)
         resp = Response(responsejs, status=500, mimetype='application/json')
         return resp
     except errors.OperationFailure as e:
         logger.info("Insert failed. There has been an operation failure. ", e)
-        responsejs = build_response_js("Failure", requestip)
+        responsejs = settings.build_response_js("Failure", requestip)
         resp = Response(responsejs, status=500, mimetype='application/json')
         return resp
+    finally:
+        client.close()
     logger.info("Upload completed! Upload ID: " + str(upload_id))
-
+    send_upload_notification.delay()
     return resp
 
-def build_response_js(status, requestip):
-    """
-    This method is used to build the response json to the requesting server.
-    """
-    responsejs = {'ip': requestip}
-    if status == 'Success':
-        responsejs["Success"] = "Your request was succesfully processed."
-    else:
-        responsejs["Failure"] = "Your request failed to processed."
-    responsejs = dumps(responsejs)
-    return responsejs
+
+    # logger.debug("Email message notificaiton failed: " + err)

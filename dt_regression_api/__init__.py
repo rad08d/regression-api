@@ -4,6 +4,8 @@ from . import customlogg
 from .auth import auth_blueprint
 from .api import api_blueprint
 
+
+
 def create_app(config):
     app = Flask(__name__)
     add_blueprints(app)
