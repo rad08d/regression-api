@@ -46,7 +46,7 @@ def upload():
     finally:
         client.close()
     logger.info("Upload completed! Upload ID: " + str(upload_id))
-    send_upload_notification.delay()
+    send_upload_notification.apply_async(args=[data])
     return resp
 
 

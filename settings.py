@@ -12,6 +12,7 @@ class Configuration(object):
     MAIL_DEFAULT_SENDER = 'datatransfer@eshots.com'
     MAIL_USER = 'regressioneshots@gmail.com'
     MAIL_USER_PASS = '!Welcome1'
+    MAIL_RECIPIENT = 'adinneen@eshots.com'
 
     MESSAGES = {'Success': "Your request was succesfully processed.",
                 'Failure': "Your request failed to processed."}

@@ -12,9 +12,10 @@ settings = Configuration()
 celery = Celery('tasks', broker=settings.CELERY_BROKER_URL)
 
 @celery.task
-def send_upload_notification():
-    RECIEVERS = 'adinneen@eshots.com'
-    MESSAGETEXT = """You have successfully uploaded a dataset!"""
+def send_upload_notification(data):
+    settings = Configuration()
+    RECIEVERS = settings.MAIL_RECIPIENT
+    MESSAGETEXT = settings.MESSAGES['Success'] + "\nYour uploaded data: \n " + data
     settings = Configuration()
     msg = MIMEMultipart()
     msg['Subject'] = "Test email from Testing API"
@@ -25,5 +26,5 @@ def send_upload_notification():
     s.ehlo()
     s.starttls()
     s.login(settings.MAIL_USER, settings.MAIL_USER_PASS)
-    s.sendmail(settings.MAIL_USER, 'adinneen@eshots.com', msg.as_string())
+    s.sendmail(settings.MAIL_USER, settings.MAIL_RECIPIENT, msg.as_string())
     s.quit()
