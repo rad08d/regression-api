@@ -6,13 +6,13 @@ class Configuration(object):
     MONGO_PORT = 27017
     MONGO_DB = 'uploads'
     CELERY_BROKER_URL = 'redis://localhost:6379/0'
-    CELERY_APP_NAME = 'dt_regression_api'
-    MAIL_SERVER = 'smtp.gmail.com'
+    CELERY_APP_NAME = ''
+    MAIL_SERVER = ''
     MAIL_PORT = 587
     MAIL_DEFAULT_SENDER = 'datatransfer@eshots.com'
-    MAIL_USER = 'regressioneshots@gmail.com'
-    MAIL_USER_PASS = '!Welcome1'
-    MAIL_RECIPIENT = 'adinneen@eshots.com'
+    MAIL_USER = ''
+    MAIL_USER_PASS = ''
+    MAIL_RECIPIENT = ''
 
     MESSAGES = {'Success': "Your request was succesfully processed.",
                 'Failure': "Your request failed to processed."}
