@@ -29,7 +29,8 @@ def upload():
     client = MongoClient(settings.MONGO_IP, settings.MONGO_PORT)
     try:
         db = client[settings.MONGO_DB]
-        upload = db.uploads
+        #Specify mongo collection
+        upload = db.posts
         upload_id = upload.insert_one(datadict).inserted_id
         responsejs = settings.build_response_js("Success", requestip)
         resp = Response(responsejs, status=200, mimetype='application/json')

@@ -5,7 +5,7 @@ class Configuration(object):
     MONGO_IP = 'localhost'
     MONGO_PORT = 27017
     MONGO_DB = 'uploads'
-    CELERY_BROKER_URL = 'redis://localhost:6379/0'
+    CELERY_BROKER_URL = 'amqp://localhost:5672'
     CELERY_APP_NAME = ''
     MAIL_SERVER = ''
     MAIL_PORT = 587
