@@ -1,5 +1,4 @@
 __author__ = 'alandinneen'
-from settings import Configuration
 from smtplib import SMTP
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -16,7 +15,6 @@ def send_upload_notification(data):
     settings = Configuration()
     RECIEVERS = settings.MAIL_RECIPIENT
     MESSAGETEXT = settings.MESSAGES['Success'] + "\nYour uploaded data: \n " + data
-    settings = Configuration()
     msg = MIMEMultipart()
     msg['Subject'] = "Test email from Testing API"
     msg['From'] = settings.MAIL_DEFAULT_SENDER
