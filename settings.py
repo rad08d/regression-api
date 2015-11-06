@@ -38,3 +38,5 @@ class DevConfiguration(Configuration):
     host = "127.0.0.1"
     port = 8001
 
+class ProductionConfiguration(Configuration):
+    DEBUG = False
