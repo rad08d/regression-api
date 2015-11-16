@@ -36,7 +36,7 @@ def upload():
         resp = Response(responsejs, status=200, mimetype='application/json')
     except errors.NetworkTimeout as e:
         logger.info("Insert failed. There has been a network error. ", e)
-        responsejs = settings.build_response_js("Failure", requestip)
+        responsejs = settings.build_response_js("Failure", requestip=requestip, uploadid=upload_id)
         resp = Response(responsejs, status=500, mimetype='application/json')
         return resp
     except errors.OperationFailure as e:
@@ -49,6 +49,3 @@ def upload():
     logger.info("Upload completed! Upload ID: " + str(upload_id))
     send_upload_notification.apply_async(args=[data])
     return resp
-
-
-    # logger.debug("Email message notificaiton failed: " + err)

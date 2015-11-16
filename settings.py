@@ -21,8 +21,9 @@ class Configuration(object):
 
 
     # Application specific cofiguration methods.
-    def build_response_js(self, status, requestip):
-        responsejs = {'ip': requestip}
+    def build_response_js(self, status, requestip, uploadid=None):
+        responsejs = {'ip': requestip,
+                      'uploadid': uploadid}
         if status == 'Success':
             responsejs["Success"] = self.MESSAGES['Success']
         else:
