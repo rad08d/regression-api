@@ -32,7 +32,7 @@ def upload():
         #Specify mongo collection
         upload = db.posts
         upload_id = upload.insert_one(datadict).inserted_id
-        responsejs = settings.build_response_js("Success", requestip=requestip, uploadid=upload_id)
+        responsejs = settings.build_response_js("Success", requestip=requestip, uploadid=str(upload_id))
         resp = Response(responsejs, status=200, mimetype='application/json')
     except errors.NetworkTimeout as e:
         logger.info("Insert failed. There has been a network error. ", e)
