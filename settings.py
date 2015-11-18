@@ -6,13 +6,7 @@ class Configuration(object):
     MONGO_PORT = 27017
     MONGO_DB = 'uploads'
     CELERY_BROKER_URL = 'amqp://localhost:5672'
-    CELERY_APP_NAME = ''
-    MAIL_SERVER = ''
-    MAIL_PORT = 587
-    MAIL_DEFAULT_SENDER = 'dtregression@eshots.com'
-    MAIL_USER = ''
-    MAIL_USER_PASS = ''
-    MAIL_RECIPIENT = ''
+    CELERY_APP_NAME = 'dt_regression_api'
 
     MESSAGES = {'Success': "Your request was succesfully processed.",
                 'Failure': "Your request failed to processed."}

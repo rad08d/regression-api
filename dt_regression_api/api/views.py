@@ -2,12 +2,12 @@ __author__ = 'alandinneen'
 from logging import getLogger
 from time import time
 from datetime import datetime
-
+from xml.etree.ElementTree import ElementTree as ET
 from . import api_blueprint
 from settings import Configuration
 from pymongo import MongoClient, errors
 from flask import Response, request
-from dt_regression_api.tasks import send_upload_notification
+from dt_regression_api.tasks import send_successful_upload_notification
 
 
 @api_blueprint.route('/api/upload', methods=['POST'])
@@ -47,5 +47,12 @@ def upload():
     finally:
         client.close()
     logger.info("Upload completed! Upload ID: " + str(upload_id))
-    send_upload_notification.apply_async(args=[data])
+    send_successful_upload_notification.apply_async(args=[data])
     return resp
+
+@api_blueprint('/api/upload/xml', methods=['POST'])
+def upload_xml():
+    """
+    This url is meant to expose xml validation
+    """
+    pass
