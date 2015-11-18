@@ -1,5 +1,5 @@
 __author__ = 'alandinneen'
-from email import email as em
+from custom_email import custom_email as em
 from celery import Celery
 from settings import Configuration
 
