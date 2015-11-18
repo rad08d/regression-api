@@ -43,10 +43,10 @@ class SuccessEmail(Email):
 
     def __init__(self, msgTxt=None):
         self.msg = super(SuccessEmail, self)._build_base_email()
-        self._BASE_EMAIL_HTML.format(msgTxt)
+        self._msgTxt = msgTxt
 
     def send_email(self):
-        self.msg.attach(MIMEText(self._BASE_EMAIL_HTML, 'html'))
+        self.msg.attach(MIMEText(self._BASE_EMAIL_HTML.format(self._msgTxt), 'html'))
         s = SMTP(self._MAIL_SERVER, self._MAIL_PORT)
         s.ehlo()
         s.starttls()

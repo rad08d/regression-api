@@ -18,5 +18,5 @@ def send_successful_upload_notification(data):
         <br>
     <h5>{0}</h5>
     """.format(data)
-    email = em.SuccessEmail(msg)
+    email = em.SuccessEmail(msgTxt=msg)
     email.send_email()
