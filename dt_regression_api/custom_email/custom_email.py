@@ -52,5 +52,5 @@ class SuccessEmail(Email):
         s.ehlo()
         s.starttls()
         s.login(self._MAIL_USER, self._MAIL_USER_PASS)
-        s.sendmail(self._MAIL_USER, self._MAIL_RECIPIENT, self.msg.as_string())
+        s.sendmail(self._MAIL_USER, self._RECIEVERS, self.msg.as_string())
         s.quit()
