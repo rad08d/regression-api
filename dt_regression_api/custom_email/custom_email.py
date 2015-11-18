@@ -43,7 +43,7 @@ class SuccessEmail(Email):
 
     def __init__(self, msgTxt=None):
         self.msg = super(SuccessEmail, self)._build_base_email()
-        self.msgTxt = msgTxt
+        self.msgTxt.format(msgTxt)
 
     def send_email(self):
         self._BASE_EMAIL_HTML.format(self.msgTxt)
