@@ -50,7 +50,7 @@ def upload():
     send_successful_upload_notification.apply_async(args=[data])
     return resp
 
-@api_blueprint('/api/upload/xml', methods=['POST'])
+@api_blueprint.route('/api/upload/xml', methods=['POST'])
 def upload_xml():
     """
     This url is meant to expose xml validation
