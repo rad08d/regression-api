@@ -9,7 +9,7 @@ class Configuration(object):
     CELERY_APP_NAME = ''
     MAIL_SERVER = ''
     MAIL_PORT = 587
-    MAIL_DEFAULT_SENDER = 'datatransfer@eshots.com'
+    MAIL_DEFAULT_SENDER = 'dtregression@eshots.com'
     MAIL_USER = ''
     MAIL_USER_PASS = ''
     MAIL_RECIPIENT = ''
