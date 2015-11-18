@@ -3,7 +3,7 @@ from logging import getLogger
 from time import time
 from datetime import datetime
 import xml.etree.ElementTree as ET
-from xml.etree.cElementTree import ParseError
+from xml.etree.ElementTree import ParseError
 from . import api_blueprint
 from settings import Configuration
 from pymongo import MongoClient, errors
