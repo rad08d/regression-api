@@ -3,7 +3,6 @@ from logging import getLogger
 from time import time
 from datetime import datetime
 import xml.etree.ElementTree as ET
-from xml.etree.ElementTree import ParseError
 from . import api_blueprint
 from settings import Configuration
 from pymongo import MongoClient, errors
@@ -62,5 +61,5 @@ def upload_xml():
         xml = ET.fromstring(data)
         if xml is not None:
             celtask.send_vaidated_xml_notification.apply_async(args=[data])
-    except ParseError as e:
+    except ET.ParseError as e:
         celtask.send_invalid_xml_notification.apply_async(args=[e])
