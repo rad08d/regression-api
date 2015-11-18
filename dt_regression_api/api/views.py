@@ -2,12 +2,12 @@ __author__ = 'alandinneen'
 from logging import getLogger
 from time import time
 from datetime import datetime
-from xml.etree.ElementTree import ElementTree as ET
+import xml.etree.ElementTree as ET
 from . import api_blueprint
 from settings import Configuration
 from pymongo import MongoClient, errors
 from flask import Response, request
-from dt_regression_api.tasks import send_successful_upload_notification
+import dt_regression_api.tasks as celtask
 
 
 @api_blueprint.route('/api/upload', methods=['POST'])
@@ -47,7 +47,7 @@ def upload():
     finally:
         client.close()
     logger.info("Upload completed! Upload ID: " + str(upload_id))
-    send_successful_upload_notification.apply_async(args=[data])
+    celtask.send_successful_upload_notification.apply_async(args=[data])
     return resp
 
 @api_blueprint.route('/api/upload/xml', methods=['POST'])
@@ -55,4 +55,10 @@ def upload_xml():
     """
     This url is meant to expose xml validation
     """
-    pass
+    data = str(request.get_data(as_text=True))
+    try:
+        xml = ET.fromstring(data)
+        if xml is not None:
+            celtask.send_vaidated_xml_notification.apply_async(args=[data])
+    except ET.ParseError as e:
+        celtask.send_invalid_xml_notification.apply_async(args=[data])

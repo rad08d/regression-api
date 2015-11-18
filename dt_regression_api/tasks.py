@@ -17,5 +17,27 @@ def send_successful_upload_notification(data):
         <br>
     <h4>{0}</h4>
     """.format(data)
+    assemble_send_success_email(msg)
+
+@celery.task
+def send_vaidated_xml_notification(data):
+    msg = """
+    <h4>Your uploaded XML syntax has been validated. Nice job!</h4>
+    <h4>Below is your validated XML: </h4>
+        <br>
+    <h4>{0}</h4>
+    """.format(data)
+    assemble_send_success_email(msg)
+
+@celery.task
+def send_invalid_xml_notification(data):
+    msg = """
+    <h4>Your uploaded XML syntax is INVALID.....come on, rookie.....</h4>
+    <h4>Below is what Python has to say about your XML: </h4>
+        <br>
+    <h4>{0}</h4>
+    """.format(data)
+
+def assemble_send_success_email(msg):
     email = em.SuccessEmail(msgTxt=msg)
     email.send_email()
