@@ -46,7 +46,6 @@ class SuccessEmail(Email):
         self._BASE_EMAIL_HTML.format(msgTxt)
 
     def send_email(self):
-        self._BASE_EMAIL_HTML.format(self.msgTxt)
         self.msg.attach(MIMEText(self._BASE_EMAIL_HTML, 'html'))
         s = SMTP(self._MAIL_SERVER, self._MAIL_PORT)
         s.ehlo()
