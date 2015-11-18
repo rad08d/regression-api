@@ -50,6 +50,7 @@ def upload():
     celtask.send_successful_upload_notification.apply_async(args=[data])
     return resp
 
+
 @api_blueprint.route('/api/upload/xml', methods=['POST'])
 def upload_xml():
     """
@@ -61,4 +62,4 @@ def upload_xml():
         if xml is not None:
             celtask.send_vaidated_xml_notification.apply_async(args=[data])
     except ET.ParseError as e:
-        celtask.send_invalid_xml_notification.apply_async(args=[data])
+        celtask.send_invalid_xml_notification.apply_async(args=[e])
