@@ -15,6 +15,7 @@ class Email(object):
     _BASE_EMAIL_HTML = """
         <html>
             <head><h1>DT Regression API Response Message</h1></head>
+                <br>
             <body>
                 <p>
                     {0}

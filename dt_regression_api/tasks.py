@@ -12,9 +12,8 @@ celery = Celery('tasks', broker=settings.CELERY_BROKER_URL)
 @celery.task
 def send_successful_upload_notification(data):
     msg = """
-    <h3>Your upload was succesfully uploaded!</h3>
-        <br>
-    <h3>Here is what was uploaded:</h3>
+    <h4>Your upload was succesfully uploaded!</h4>
+    <h4>Here is what was uploaded:</h4>
         <br>
     <h4>{0}</h4>
     """.format(data)
