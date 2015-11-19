@@ -56,7 +56,7 @@ def upload_xml():
     else:
         datadict["validXML"] = validation
         uploadid = insert_upload(datadict=datadict)
-        celtask.send_invalid_xml_notification.apply_async(args=[validation])
+        celtask.send_invalid_xml_notification.apply_async(args=[validation, data])
         return Response(response=build_response_js(status=400, requestip=requestip, uploadid=uploadid), status=200, mimetype='application/json')
 
 

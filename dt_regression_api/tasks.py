@@ -30,13 +30,15 @@ def send_vaidated_xml_notification(data):
     assemble_send_success_email(msg)
 
 @celery.task
-def send_invalid_xml_notification(data):
+def send_invalid_xml_notification(data, xml):
     msg = """
     <h4>Your uploaded XML syntax is INVALID.....come on, rookie.....</h4>
     <h4>Below is what Python has to say about your XML: </h4>
         <br>
     <h4>{0}</h4>
-    """.format(data)
+    <h4>Your XML is as follows: </h4>
+    <h4>{2}</h4>
+    """.format(data, xml)
     assemble_send_success_email(msg)
 
 def assemble_send_success_email(msg):
