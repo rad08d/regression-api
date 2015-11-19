@@ -51,13 +51,11 @@ def upload_xml():
     if validation == True:
         datadict['validXML'] = "Validated"
         uploadid = insert_upload(datadict=datadict)
-        str(uploadid)
         celtask.send_vaidated_xml_notification.apply_async(args=[data])
         return Response(response=build_response_js(status=200, requestip=requestip, uploadid=uploadid), status=200, mimetype='application/json')
     else:
         datadict["validXML"] = validation
         uploadid = insert_upload(datadict=datadict)
-        str(uploadid)
         celtask.send_invalid_xml_notification.apply_async(args=[validation])
         return Response(response=build_response_js(status=200, requestip=requestip, uploadid=uploadid), status=200, mimetype='application/json')
 
@@ -93,7 +91,7 @@ def build_response_js(status, requestip, uploadid=None):
     MESSAGES = {'Success': "Your request was succesfully processed.",
                 'Failure': "Your request failed to processed."}
     responsejs = {'ip': requestip,
-                  'uploadid': uploadid}
+                  'uploadid': str(uploadid)}
     if status == 200:
         responsejs["Success"] = MESSAGES['Success']
     else:
