@@ -74,8 +74,6 @@ def insert_upload(datadict):
         return uploadid
     except errors.NetworkTimeout as e:
         logger.info("Insert failed. There has been a network error. ", e)
-        #responsejs = settings.build_response_js("Failure", requestip=requestip)
-        #resp = Response(responsejs, status=500, mimetype='application/json')
         return None
     except errors.OperationFailure as e:
         logger.info("Insert failed. There has been an operation failure. ", e)
