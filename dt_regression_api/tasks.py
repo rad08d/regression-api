@@ -36,7 +36,7 @@ def send_invalid_xml_notification(message, data):
     <h4>Below is what Python has to say about your XML: </h4>
         <br>
     <h4>{0}</h4>
-    <h4>Your XML is as follows: </h4>
+    <h4>Your malformed XML is as follows: </h4>
     <h4>{1}</h4>
     """.format(message, data)
     assemble_send_success_email(msg)
