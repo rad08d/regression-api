@@ -37,6 +37,7 @@ def send_invalid_xml_notification(data):
         <br>
     <h4>{0}</h4>
     """.format(data)
+    assemble_send_success_email(msg)
 
 def assemble_send_success_email(msg):
     email = em.SuccessEmail(msgTxt=msg)

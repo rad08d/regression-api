@@ -57,7 +57,7 @@ def upload_xml():
         datadict["validXML"] = validation
         uploadid = insert_upload(datadict=datadict)
         celtask.send_invalid_xml_notification.apply_async(args=[validation])
-        return Response(response=build_response_js(status=200, requestip=requestip, uploadid=uploadid), status=200, mimetype='application/json')
+        return Response(response=build_response_js(status=400, requestip=requestip, uploadid=uploadid), status=200, mimetype='application/json')
 
 
 def insert_upload(datadict):
@@ -89,11 +89,14 @@ def build_response_js(status, requestip, uploadid=None):
     This method builds the json to return to the client that posted.
     """
     MESSAGES = {'Success': "Your request was succesfully processed.",
-                'Failure': "Your request failed to processed."}
+                'Failure': "Your request failed to processed.",
+                'Invalid_XML': 'Your XML is invalid.'}
     responsejs = {'ip': requestip,
                   'uploadid': str(uploadid)}
     if status == 200:
         responsejs["Success"] = MESSAGES['Success']
+    elif status == 400:
+        responsejs['Invalid_XML'] = MESSAGES['Invalid_XML']
     else:
         responsejs["Failure"] = MESSAGES['Failure']
     responsejs = dumps(responsejs)
