@@ -37,7 +37,7 @@ def send_invalid_xml_notification(message, data):
         <br>
     <h4>{0}</h4>
     <h4>Your XML is as follows: </h4>
-    <h4>{2}</h4>
+    <h4>{1}</h4>
     """.format(message, data)
     assemble_send_success_email(msg)
 
