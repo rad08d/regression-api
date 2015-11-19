@@ -8,23 +8,6 @@ class Configuration(object):
     CELERY_BROKER_URL = 'amqp://localhost:5672'
     CELERY_APP_NAME = 'dt_regression_api'
 
-    MESSAGES = {'Success': "Your request was succesfully processed.",
-                'Failure': "Your request failed to processed."}
-
-
-
-
-    # Application specific cofiguration methods.
-    def build_response_js(self, status, requestip, uploadid=None):
-        responsejs = {'ip': requestip,
-                      'uploadid': uploadid}
-        if status == 'Success':
-            responsejs["Success"] = self.MESSAGES['Success']
-        else:
-            responsejs["Failure"] = self.MESSAGES['Failure']
-        responsejs = dumps(responsejs)
-        return responsejs
-
 
 
 
