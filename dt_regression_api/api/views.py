@@ -26,6 +26,7 @@ def upload():
                 "data": data,
                 "upload_time": timestamp}
     uploadid = insert_upload(datadict=datadict)
+    str(uploadid)
     if uploadid:
         celtask.send_successful_upload_notification.apply_async(args=[data])
         return Response(response=build_response_js(status=200, requestip=requestip, uploadid=uploadid), status=200, mimetype='application/json')
@@ -50,11 +51,13 @@ def upload_xml():
     if validation == True:
         datadict['validXML'] = "Validated"
         uploadid = insert_upload(datadict=datadict)
+        str(uploadid)
         celtask.send_vaidated_xml_notification.apply_async(args=[data])
         return Response(response=build_response_js(status=200, requestip=requestip, uploadid=uploadid), status=200, mimetype='application/json')
     else:
         datadict["validXML"] = validation
         uploadid = insert_upload(datadict=datadict)
+        str(uploadid)
         celtask.send_invalid_xml_notification.apply_async(args=[validation])
         return Response(response=build_response_js(status=200, requestip=requestip, uploadid=uploadid), status=200, mimetype='application/json')
 
