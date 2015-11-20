@@ -26,7 +26,6 @@ def upload():
                 "data": data,
                 "upload_time": timestamp}
     uploadid = insert_upload(datadict=datadict)
-    str(uploadid)
     if uploadid:
         celtask.send_successful_upload_notification.apply_async(args=[data])
         return Response(response=build_response_js(status=200, requestip=requestip, uploadid=uploadid), status=200, mimetype='application/json')

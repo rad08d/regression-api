@@ -15,7 +15,7 @@ def send_successful_upload_notification(data):
     <h4>Your upload was succesfully uploaded!</h4>
     <h4>Here is what was uploaded:</h4>
         <br>
-    <h4>{0}</h4>
+    <h4><pre>{0}</pre></h4>
     """.format(data)
     assemble_send_email(msg=msg)
 
@@ -25,7 +25,7 @@ def send_vaidated_xml_notification(data):
     <h4>Your uploaded XML syntax has been validated. Nice job!</h4>
     <h4>Below is your validated XML: </h4>
         <br>
-    <h4>{0}</h4>
+    <h4><pre>{0}</pre></h4>
     """.format(data)
     assemble_send_email(msg=msg)
 
@@ -37,7 +37,7 @@ def send_invalid_xml_notification(message, data):
         <br>
     <h4>{0}</h4>
     <h4>Your malformed XML is as follows: </h4>
-    <h4>{1}</h4>
+    <h4><pre>{1}</pre></h4>
     """.format(message, data)
     assemble_send_email(msg=msg, success=False)
 
