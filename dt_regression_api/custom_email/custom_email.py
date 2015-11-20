@@ -34,17 +34,8 @@ class Email(object):
         msg['Subject'] = self._MSGSUBJECT
         msg['From'] = self._SENDER
         msg['To'] = self._RECIEVERS
+        self._msgTxt = ''
         return msg
-
-
-class SuccessEmail(Email):
-    """
-    This class is used to inherit from a base email class and build a new success email
-    """
-
-    def __init__(self, msgTxt=None):
-        self.msg = super(SuccessEmail, self)._build_base_email()
-        self._msgTxt = msgTxt
 
     def send_email(self):
         self.msg.attach(MIMEText(self._BASE_EMAIL_HTML.format(self._msgTxt), 'html'))
@@ -54,3 +45,25 @@ class SuccessEmail(Email):
         s.login(self._MAIL_USER, self._MAIL_USER_PASS)
         s.sendmail(self._MAIL_USER, self._RECIEVERS, self.msg.as_string())
         s.quit()
+
+
+class SuccessEmail(Email):
+    """
+    This class is used to inherit from a base email class and build a new success email.
+    It should be used to configure any future successful email specific logic.
+    """
+
+    def __init__(self, msgTxt=None):
+        self.msg = super(SuccessEmail, self)._build_base_email()
+        self._msgTxt = msgTxt
+
+
+class FailureEmail(Email):
+    """
+    This class is used to build an email notification that some sort of failure occurred.
+    It should be used to configure any future failure email specific logic
+    """
+
+    def __init__(self, msgTxt=None):
+        self.msg = super(FailureEmail, self)._build_base_email()
+        self._msgTxt = msgTxt

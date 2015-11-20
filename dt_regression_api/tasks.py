@@ -17,7 +17,7 @@ def send_successful_upload_notification(data):
         <br>
     <h4>{0}</h4>
     """.format(data)
-    assemble_send_success_email(msg)
+    assemble_send_email(msg=msg)
 
 @celery.task
 def send_vaidated_xml_notification(data):
@@ -27,7 +27,7 @@ def send_vaidated_xml_notification(data):
         <br>
     <h4>{0}</h4>
     """.format(data)
-    assemble_send_success_email(msg)
+    assemble_send_email(msg=msg)
 
 @celery.task
 def send_invalid_xml_notification(message, data):
@@ -39,8 +39,11 @@ def send_invalid_xml_notification(message, data):
     <h4>Your malformed XML is as follows: </h4>
     <h4>{1}</h4>
     """.format(message, data)
-    assemble_send_success_email(msg)
+    assemble_send_email(msg=msg, success=False)
 
-def assemble_send_success_email(msg):
-    email = em.SuccessEmail(msgTxt=msg)
+def assemble_send_email(msg,success=True):
+    if success:
+        email = em.SuccessEmail(msgTxt=msg)
+    else:
+        email = em.FailureEmail(msgTxt=msg)
     email.send_email()
