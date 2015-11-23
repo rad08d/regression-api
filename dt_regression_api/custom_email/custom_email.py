@@ -9,8 +9,8 @@ class Email(object):
     """
 
     ### Email specific dodads ####
-    _RECIEVERS = 'dtregression@eshots.com'
-    _SENDER = 'dtregression@eshots.com'
+    _RECIEVERS = 'example@example.com'
+    _SENDER = 'example@example.com'
     _MSGSUBJECT = 'DT Testing API -- Response'
     _BASE_EMAIL_HTML = """
         <html>
@@ -24,10 +24,10 @@ class Email(object):
         </html>
     """
     ### SMTP specific configs ####
-    _MAIL_SERVER = 'smtp.gmail.com'
+    _MAIL_SERVER = 'smtpexample@example.com'
     _MAIL_PORT = 587
-    _MAIL_USER = 'regressioneshots@gmail.com'
-    _MAIL_USER_PASS = '!Welcome1'
+    _MAIL_USER = 'example@example.com'
+    _MAIL_USER_PASS = 'password'
 
     def _build_base_email(self):
         msg = MIMEMultipart()
